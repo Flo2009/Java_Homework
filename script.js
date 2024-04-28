@@ -5,19 +5,19 @@ const addEmployeesBtn = document.querySelector('#add-employees-btn');
 const collectEmployees = function() {
   // TODO: Get user input to create and return an array of employee objects
   let moreEmployees = true;
-
+//declare the variables for the array of objects
   let firstName="";
   let lastName="";
   let salary=0;
-
+//declare the array
   let employeesArray =[];
-  
+  //while loop runs as long as moreEmployees is true
   while (moreEmployees){
-
+//Prompts to enter employees
     let newEmployeeFirstName = window.prompt("Please Enter the employee's first name!");
     let newEmployeeLastName = window.prompt("Please enter the employee's last name!");
     let newEmployeeSalary = window.prompt("Please enter the employee's salary");
-
+    //If nothing is entered or not the correct value return 
     if (!newEmployeeFirstName||!newEmployeeLastName||!newEmployeeSalary){
       alert("Please Enter a Value");
       return;
@@ -28,12 +28,13 @@ const collectEmployees = function() {
       alert("Please Enter a salary Number!");
       return;
     }
+    //give the prompt inserts to the array variables
     firstName = newEmployeeFirstName;
     firstName=firstName.toUpperCase();
     lastName = newEmployeeLastName;
     lastName=lastName.toUpperCase();
-    salary = newEmployeeSalary;
-
+    salary = newEmployeeSalary    
+    //add object to array
     employeesArray.push({firstName, lastName, salary});
     moreEmployees = window.confirm("Do you want to add more employees");
 
@@ -44,15 +45,22 @@ const collectEmployees = function() {
 
 const displayAverageSalary = function(employeesArray) {
   // TODO: Calculate and display the average salary
+
   let average = 0;
   let i=0;
-  if (employeesArray.length===0){
+  //Check that the Array is defined 
+  if (typeof employeesArray == "undefined"){
     return;
   }
+  else if (employeesArray.length===0){
+    return;
+  }
+  //Loop through array with forEach function and add the salary together
   employeesArray.forEach((sal) =>{
     average=average+Number(sal.salary);
     i++
   });
+  //Calculate the average and limit to two decimels
   average=(average/i).toFixed(2);
   console.log(`The average Salary is ${(average)}`)
   }
@@ -60,7 +68,14 @@ const displayAverageSalary = function(employeesArray) {
 // Select a random employee
 const getRandomEmployee = function(employeesArray) {
   // TODO: Select and display a random employee
-  console.log("Hello");
+  //Check that the Array is defined 
+  if (typeof employeesArray == "undefined"){
+    return;
+  }
+  else if (employeesArray.length===0){
+    return;
+  } 
+  //get a random number to display the employee
   let i = (Math.floor(Math.random() * employeesArray.length));
   // console.log(i);
   console.log(`The winner is ` + employeesArray[i].firstName + " " + employeesArray[i].lastName)
@@ -76,7 +91,7 @@ const getRandomEmployee = function(employeesArray) {
 const displayEmployees = function(employeesArray) {
   // Get the employee table
   const employeeTable = document.querySelector('#employee-table');
-
+  
   // Clear the employee table
   employeeTable.innerHTML = '';
 
@@ -95,11 +110,13 @@ const displayEmployees = function(employeesArray) {
     newTableRow.append(lastNameCell);
 
     const salaryCell = document.createElement("td");
+    console.log("Hello");
     // Format the salary as currency
-    salaryCell.textContent = currentEmployee.salary.toLocaleString("en-US",{
-      style:"currency",
-      currency:"USD"
-    });
+    salaryCell.textContent = '$'+(currentEmployee.salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+    // salary = ('$'+ salary);//toLocaleString("en-US",{
+      // style:"currency",
+      // currency:"USD"
+    // });
 
     newTableRow.append(salaryCell);
 
@@ -112,7 +129,6 @@ const trackEmployeeData = function() {
 
   console.table(employees);
 
-  // getRandomEmployee(employees);
 
   displayAverageSalary(employees);
 
