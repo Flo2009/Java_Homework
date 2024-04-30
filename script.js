@@ -17,6 +17,7 @@ const collectEmployees = function() {
     let newEmployeeFirstName = window.prompt("Please Enter the employee's first name!");
     let newEmployeeLastName = window.prompt("Please enter the employee's last name!");
     let newEmployeeSalary = window.prompt("Please enter the employee's salary");
+    // console.log(typeof newEmployeeSalary);
     //If nothing is entered or not the correct value return 
     if (!newEmployeeFirstName||!newEmployeeLastName||!newEmployeeSalary){
       alert("Please Enter a Value");
@@ -33,7 +34,7 @@ const collectEmployees = function() {
     firstName=firstName.toUpperCase();
     lastName = newEmployeeLastName;
     lastName=lastName.toUpperCase();
-    salary = newEmployeeSalary    
+    salary = parseFloat(newEmployeeSalary)    
     //add object to array
     employeesArray.push({firstName, lastName, salary});
     moreEmployees = window.confirm("Do you want to add more employees");
@@ -110,13 +111,14 @@ const displayEmployees = function(employeesArray) {
     newTableRow.append(lastNameCell);
 
     const salaryCell = document.createElement("td");
-    console.log("Hello");
+    
     // Format the salary as currency
-    salaryCell.textContent = '$'+(currentEmployee.salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-    // salary = ('$'+ salary);//toLocaleString("en-US",{
-      // style:"currency",
-      // currency:"USD"
-    // });
+    salaryCell.textContent = currentEmployee.salary.toLocaleString("en-US",{
+      style:"currency",
+      currency:"USD"
+    });
+
+   
 
     newTableRow.append(salaryCell);
 
