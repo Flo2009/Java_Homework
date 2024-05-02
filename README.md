@@ -13,7 +13,7 @@ The payroll tracker displays the personnel in order of the last name. The consol
 
 Click "Add Employees" and follow the prompt, when you are done hit cancel and the names will be displayed with the salary and in the console the average and winner will be displayed.
 
-![alt text](/Java_Homework//Images/Image_1.png)
+![alt text](/Images/Image_1.png)
 
 ## Credits
 
